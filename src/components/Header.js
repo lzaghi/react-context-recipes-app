@@ -34,7 +34,7 @@ function Header() {
 
   return (
     <header>
-      <div className="navbar navbar-expand-lg">
+      <div className="navbar">
         <div className="header container-fluid">
           <button
             className="icon"
@@ -64,35 +64,35 @@ function Header() {
 
           </button>
 
-          {/* <div> */}
-          <button
-            className="icon "
-            type="button"
-            onClick={ () => history.push('/profile') }
-          >
-            <img
-              data-testid="profile-top-btn"
-              src={ profilePicture }
-              alt="Foto de Perfil"
-            />
-          </button>
-          {
-            (slug !== '/profile' && slug !== '/done-recipes'
+          <div>
+            <button
+              className="icon"
+              type="button"
+              onClick={ () => history.push('/profile') }
+            >
+              <img
+                data-testid="profile-top-btn"
+                src={ profilePicture }
+                alt="Foto de Perfil"
+              />
+            </button>
+            {
+              (slug !== '/profile' && slug !== '/done-recipes'
               && slug !== '/favorite-recipes' && slug !== `/meals/${id}`)
-               && (
-                 <button
-                   className="icon"
-                   type="button"
-                   onClick={ searchButton }
-                 >
-                   <img
-                     data-testid="search-top-btn"
-                     src={ iconePicture }
-                     alt="Ícone de Pesquisa"
-                   />
-                 </button>)
-          }
-          {/* </div> */}
+                && (
+                  <button
+                    className="icon search"
+                    type="button"
+                    onClick={ searchButton }
+                  >
+                    <img
+                      data-testid="search-top-btn"
+                      src={ iconePicture }
+                      alt="Ícone de Pesquisa"
+                    />
+                  </button>)
+            }
+          </div>
         </div>
 
       </div>

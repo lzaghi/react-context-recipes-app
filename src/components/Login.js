@@ -46,24 +46,30 @@ function Login({ history }) {
         <img className="img-fluid" src={ Logo } alt="logo" />
       </div>
       <div className="d-grid gap-2 col-6 mx-auto">
-        <input
-          placeholder="E-mail"
-          className="form-control"
-          data-testid="email-input"
-          type="email"
-          name="email"
-          value={ user.email }
-          onChange={ (e) => handleChange(e) }
-        />
-        <input
-          data-testid="password-input"
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={ user.password }
-          onChange={ (e) => handleChange(e) }
-          className="form-control"
-        />
+        <label htmlFor="email" className="label">
+          <input
+            placeholder="E-mail"
+            className="form-control"
+            data-testid="email-input"
+            type="email"
+            name="email"
+            value={ user.email }
+            onChange={ (e) => handleChange(e) }
+          />
+          <span>Exemplo: email@email.com</span>
+        </label>
+        <label htmlFor="password" className="label">
+          <input
+            data-testid="password-input"
+            type="password"
+            name="password"
+            placeholder="Senha"
+            value={ user.password }
+            onChange={ (e) => handleChange(e) }
+            className="form-control"
+          />
+          <span>Use 7 ou mais caracteres</span>
+        </label>
       </div>
       <div className="d-grid gap-2 col-6 mx-auto">
         <button

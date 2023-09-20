@@ -16,7 +16,9 @@ h1 {
 .icon {
   background-color: #e45700;
   border: none;
-  padding-left: 10px;
+  margin-top: 0;
+  padding-inline: 20px;
+  transition: 0.2s;
 }
 
 
