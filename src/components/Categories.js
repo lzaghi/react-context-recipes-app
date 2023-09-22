@@ -38,8 +38,8 @@ function Categories() {
   }
 
   return (
-    <div className="categories">
-      <div className="btn-toolbar">
+    <div className="categories wrapper">
+      <div className="btn-toolbar ">
         {fiveCategories().map((category, index) => (
           <div
             key={ index }

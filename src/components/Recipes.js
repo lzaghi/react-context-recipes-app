@@ -37,7 +37,7 @@ function Recipes() {
   }, [setInitialRecipes, setCategories, slug]);
 
   return (
-    <>
+    <div className="wrapper">
       <Header />
       {!categories.length > 0 || !initialRecipes.length > 0
         ? (
@@ -54,7 +54,7 @@ function Recipes() {
           </>)}
 
       <Footer />
-    </>
+    </div>
 
   );
 }

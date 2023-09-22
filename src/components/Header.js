@@ -25,16 +25,16 @@ function Header() {
   };
 
   function handleTitle() {
-    if (slug === '/meals') return 'Meals';
-    if (slug === '/drinks') return 'Drinks';
-    if (slug === '/profile') return 'Profile';
-    if (slug === '/done-recipes') return 'Done Recipes';
-    if (slug === '/favorite-recipes') return 'Favorite Recipes';
+    if (slug === '/meals') return <p className="title">Meals</p>;
+    if (slug === '/drinks') return <p className="title">Drinks</p>;
+    if (slug === '/profile') return <p className="title">Profile</p>;
+    if (slug === '/done-recipes') return <p className="title">Done Recipes</p>;
+    if (slug === '/favorite-recipes') return <p className="title">Favorite Recipes</p>;
   }
 
   return (
     <header>
-      <div className="navbar">
+      <div className="navbar navbar-expand-lg fixed-top">
         <div className="header container-fluid">
           <button
             className="icon"
