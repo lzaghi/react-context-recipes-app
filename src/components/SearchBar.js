@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import {
@@ -16,6 +16,17 @@ function SearchBar() {
   const [input, setInput] = useState('');
   const { setData } = useContext(RecipesContext);
   const history = useHistory();
+
+  useEffect(() => {
+    if (input.length > 1 && optionSearch === 'First letter') {
+      setInput('');
+      global.alert('Your search must have only 1 (one) character');
+    }
+  }, [input, optionSearch]);
+
+  const handleChangeInput = ({ target }) => {
+    setInput(target.value);
+  };
 
   const handleChangeOptions = ({ target }) => {
     setOptionSearch(target.value);
@@ -55,12 +66,6 @@ function SearchBar() {
     return drinks();
   };
 
-  const handleChangeInput = ({ target }) => {
-    setInput(target.value);
-    if (input.length > 0 && optionSearch === 'First letter') {
-      global.alert('Your search must have only 1 (one) character');
-    }
-  };
   return (
     <div className="search">
       <div className="input-search">
@@ -71,6 +76,7 @@ function SearchBar() {
           type="text"
           placeholder="Search recipe"
           name="search"
+          value={ input }
         />
         <button
           className="btn btn-outline-dark"
@@ -83,7 +89,7 @@ function SearchBar() {
         </button>
       </div>
 
-      <div className="wrapper">
+      <div className="input-wrapper">
         <div className="inputs">
           <label htmlFor="Ingredient">
             <input
