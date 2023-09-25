@@ -1,19 +1,25 @@
-.recipeDetails {
-  text-align: center;
-
+.details-wrapper {
+  margin: 100px auto 0;
+  max-width: 85%;
 }
 
-.instructions {
-  margin-left: 15px;
-  margin-top: 20px;
-  width: 90%;
+.recipeDetails {
+  text-align: center;
+}
+
+.details-img {
+  border-radius: 30px;
+  width: 200px;
+}
+
+.instructions-title {
+  margin-top: 30px;
 }
 
 .buttons {
   display: flex;
   margin-top: 15px;
 }
-
 
 .slider-container {
   background: #f1f1f1;
@@ -53,16 +59,12 @@
 
 
 .iframe-container {
-  height: 0;
-  padding-bottom: 56.25%;
-  position: relative;
-  width: 100%;
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .iframe-container iframe {
-  height: 80%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 80%;
+  border-radius: 30px;
+  height: 340px;
+  width: 600px;
 }
