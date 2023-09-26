@@ -51,7 +51,7 @@
   opacity: 0.9;
   position: fixed;
   text-align: center;
-  width: 100%;
+  width: 85%;
 }
 
 .start-recipe:hover {
@@ -79,4 +79,20 @@
   position: absolute;
   top: -10px;
   width: 100px;
+}
+
+@media screen and ( max-width : 750px ) {
+
+  .iframe-container iframe {
+    height: 214.2px;
+    width: 378px;
+  }
+}
+
+@media screen and ( max-width : 480px ) {
+
+  .iframe-container iframe {
+    height: 166.6px;
+    width: 294px;
+  }
 }
