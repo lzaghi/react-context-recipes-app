@@ -78,9 +78,9 @@ export default function RecipeDetails() {
   }, [id]);
 
   useEffect(() => {
-    checkPathname();
     requestMeals();
     requestDrink();
+    checkPathname();
   }, []);
 
   const btnStart = (
@@ -148,7 +148,7 @@ export default function RecipeDetails() {
     return button;
   };
 
-  if (!dataMealsArray?.length > 0 && !dataDrinkArray?.length > 0) {
+  if (!dataMealsArray?.length && !dataDrinkArray?.length) {
     return (
       <>
         <Header />
@@ -164,6 +164,7 @@ export default function RecipeDetails() {
 
   return (
     <>
+      { console.log(id)}
       <Header />
       <div className="details-wrapper">
         {checkPathname().map((recipe, index) => (
