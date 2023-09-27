@@ -1,22 +1,27 @@
 .favCard {
   border: none;
   display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
   margin: 21px 21px 70px 20px;
   padding-top: 20px;
+}
+
+.img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 .favItem {
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-}
-
-.img {
-  height: 55%;
-  object-fit: cover;
-  width: 100%;
+  height: fit-content;
+  max-width: 250px;
+  min-height: 350px;
+  min-width: 120px;
+  text-align: center;
 }
 
 .favCard button {
@@ -29,4 +34,43 @@
 
 .favCard button:hover {
   opacity: 1;
+}
+
+.fav-icons {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.share-div {
+  position: relative;
+}
+
+.copied {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 2px;
+  position: absolute;
+  right: -27px;
+  top: -12px;
+  width: 100px;
+}
+
+@media screen and ( max-width : 600px ) {
+
+  .favCard {
+    border: none;
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 21px 21px 70px 20px;
+    padding-top: 20px;
+  }
+
+  .favItem {
+    max-width: 150px;
+    min-width: 100px;
+  }
 }

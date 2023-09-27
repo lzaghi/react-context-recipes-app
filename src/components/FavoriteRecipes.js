@@ -9,10 +9,19 @@ import '../CSS/FavoriteRecipes.css';
 function FavoriteRecipes() {
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const [filteredRecipes, setFilteredRecipes] = useState(favoriteRecipes);
-  const [btnCopy, setBtnCopy] = useState(false);
+  const [btnCopy, setBtnCopy] = useState(Array(favoriteRecipes.length).fill(false));
 
-  function copiedLinkMsg() {
-    setBtnCopy(true);
+  const twoSeconds = 2000;
+
+  function copiedLinkMsg(index) {
+    let newBtnCopy = [...btnCopy];
+    newBtnCopy[index] = true;
+    setBtnCopy(newBtnCopy);
+
+    newBtnCopy = Array(favoriteRecipes.length).fill(false);
+    setTimeout(() => {
+      setBtnCopy(newBtnCopy);
+    }, twoSeconds);
   }
 
   const mealsFilter = () => {
@@ -37,6 +46,15 @@ function FavoriteRecipes() {
     localStorage.setItem('favoriteRecipes', JSON.stringify(removedRecipe));
   };
 
+  const handleCopy = (type, id, index) => {
+    copiedLinkMsg(index);
+    if (type === 'meal') {
+      copy(`http://localhost:3000/meals/${id}`);
+    } else {
+      copy(`http://localhost:3000/drinks/${id}`);
+    }
+  };
+
   if (favoriteRecipes === null || favoriteRecipes.length === 0) {
     return (
       <>
@@ -53,118 +71,86 @@ function FavoriteRecipes() {
   return (
     <>
       <Header />
-      <div className="container btn">
-        <button
-          className="btn btn-outline-dark"
-          style={ { marginRight: '10px' } }
-          type="button"
-          onClick={ mealsFilter }
-          data-testid="filter-by-meal-btn"
-        >
-          Meals
-        </button>
-        <button
-          style={ { marginRight: '10px' } }
-          className="btn btn-outline-dark"
-          type="button"
-          onClick={ drinksFilter }
-          data-testid="filter-by-drink-btn"
-        >
-          Drinks
-        </button>
-        <button
-          className="btn btn-outline-dark"
-          type="button"
-          onClick={ allFilter }
-          data-testid="filter-by-all-btn"
-        >
-          All
-        </button>
-        {(btnCopy === true) ? <p>Link copied!</p> : null}
+      <div className="wrapper">
+        <div className="d-flex justify-content-center">
+          <button
+            style={ { marginRight: '10px' } }
+            className="btn btn-outline-dark"
+            type="button"
+            onClick={ allFilter }
+            data-testid="filter-by-all-btn"
+          >
+            All
+          </button>
+          <button
+            className="btn btn-outline-dark"
+            style={ { marginRight: '10px' } }
+            type="button"
+            onClick={ mealsFilter }
+            data-testid="filter-by-meal-btn"
+          >
+            Meals
+          </button>
+          <button
+            className="btn btn-outline-dark"
+            type="button"
+            onClick={ drinksFilter }
+            data-testid="filter-by-drink-btn"
+          >
+            Drinks
+          </button>
+        </div>
         <div className="favCard">
           {
-            filteredRecipes?.map((el, index) => {
-              if (el.type === 'meal') {
-                return (
-                  <div clasName="favItem" id={ el.id }>
-                    <Link to={ `meals/${el.id}` }>
-                      <img
-                        src={ el.image }
-                        alt={ index }
-                        className="img"
-                        data-testid={ `${index}-horizontal-image` }
-                      />
-                      <p
-                        data-testid={ `${index}-horizontal-name` }
-                      >
-                        {el.name}
-                      </p>
-                    </Link>
-                    <p data-testid={ `${index}-horizontal-top-text` }>
-                      { `${el.nationality} - ${el.category}` }
-                    </p>
+            filteredRecipes?.map((el, index) => (
+              <div className="favItem" id={ el.id } key={ el.name }>
+                <Link
+                  className="link"
+                  to={ el.type === 'meal' ? `meals/${el.id}` : `drinks/${el.id}` }
+                >
+                  <img
+                    src={ el.image }
+                    alt={ el.name }
+                    className="img fav-img"
+                    data-testid={ `${index}-horizontal-image` }
+                  />
+                  <p
+                    className="name"
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    {el.name}
+                  </p>
+                  <p data-testid={ `${index}-horizontal-top-text` }>
+                    Category:
+                    {' '}
+                    { el.type === 'meal'
+                      ? `${el.category} (${el.nationality})` : el.alcoholicOrNot }
+                  </p>
+                </Link>
+                <div className="fav-icons">
+                  <button
+                    type="button"
+                    data-testid={ `${index}-horizontal-favorite-btn` }
+                    src={ blackHeart }
+                    onClick={ removeLocal }
+                  >
+                    <img src={ blackHeart } alt="coração" />
+                  </button>
+                  <div className="share-div">
                     <button
                       type="button"
                       data-testid={ `${index}-horizontal-share-btn` }
-                      onClick={ () => {
-                        copiedLinkMsg();
-                        copy(`http://localhost:3000/meals/${el.id}`);
-                      } }
+                      onClick={ () => handleCopy(el.type, el.id, index) }
                       src={ shareIcon }
                     >
                       <img src={ shareIcon } alt="compartilhar" />
                     </button>
-                    <button
-                      type="button"
-                      data-testid={ `${index}-horizontal-favorite-btn` }
-                      src={ blackHeart }
-                      onClick={ removeLocal }
-                    >
-                      <img src={ blackHeart } alt="coração" />
-                    </button>
+                    { btnCopy[index] && <p className="copied">Link copied!</p>}
+
                   </div>
-                );
-              }
-              return (
-                <div className="favItem" id={ el.id } key={ index }>
-                  <Link to={ `drinks/${el.id}` }>
-                    <img
-                      src={ el.image }
-                      alt={ index }
-                      className="img"
-                      data-testid={ `${index}-horizontal-image` }
-                    />
-                    <h4
-                      data-testid={ `${index}-horizontal-name` }
-                    >
-                      {el.name}
-                    </h4>
-                  </Link>
-                  <p key={ index } data-testid={ `${index}-horizontal-top-text` }>
-                    { el.alcoholicOrNot }
-                  </p>
-                  <button
-                    type="button"
-                    data-testid={ `${index}-horizontal-share-btn` }
-                    src={ shareIcon }
-                    onClick={ () => {
-                      copiedLinkMsg();
-                      copy(`http://localhost:3000/drinks/${el.id}`);
-                    } }
-                  >
-                    <img src={ shareIcon } alt="compartilhar" />
-                  </button>
-                  <button
-                    type="button"
-                    data-testid={ `${index}-horizontal-favorite-btn` }
-                    onClick={ removeLocal }
-                    src={ blackHeart }
-                  >
-                    <img src={ blackHeart } alt="coração" />
-                  </button>
                 </div>
-              );
-            })
+              </div>
+            ))
           }
         </div>
       </div>

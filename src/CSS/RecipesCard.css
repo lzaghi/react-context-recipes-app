@@ -1,9 +1,3 @@
-.img {
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-}
-
 .card {
   border: none;
   display: grid;
@@ -11,6 +5,12 @@
   grid-template-columns: repeat(4, 1fr);
   margin: 21px 21px 70px 20px;
   padding-top: 20px;
+}
+
+.img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 .link {
@@ -32,6 +32,8 @@
 }
 
 .name {
+  font-size: 18px;
+  font-weight: 700;
   margin-top: 10px;
 }
 

@@ -40,8 +40,8 @@ function DoneRecipes() {
   return (
     <>
       <Header />
-      <div className="container btn">
-        <div>
+      <div className="container">
+        <div className="d-flex justify-content-center">
           <button
             style={ { marginRight: '10px' } }
             className="btn btn-outline-dark"
@@ -50,9 +50,7 @@ function DoneRecipes() {
             onClick={ handleFilterAll }
           >
             All
-
           </button>
-
           <button
             style={ { marginRight: '10px' } }
             className="btn btn-outline-dark"
@@ -61,9 +59,7 @@ function DoneRecipes() {
             onClick={ handleFilterMeal }
           >
             Meals
-
           </button>
-
           <button
             className="btn btn-outline-dark"
             type="button"
@@ -71,9 +67,7 @@ function DoneRecipes() {
             onClick={ handleFilterDrink }
           >
             Drinks
-
           </button>
-
         </div>
 
         <div className="cardDone">
