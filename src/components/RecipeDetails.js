@@ -183,7 +183,12 @@ export default function RecipeDetails() {
 
             </h1>
             {(history.location.pathname === `/meals/${id}`)
-          && <p data-testid="recipe-category">{ recipe.strCategory }</p>}
+          && (
+            <p data-testid="recipe-category">
+              Category:
+              {' '}
+              { recipe.strCategory }
+            </p>)}
             {(history.location.pathname === `/drinks/${id}`)
           && <p data-testid="recipe-category">{recipe.strAlcoholic}</p>}
 

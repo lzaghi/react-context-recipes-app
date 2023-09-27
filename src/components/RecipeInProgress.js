@@ -168,7 +168,7 @@ function RecipeInProgress() {
   return (
     <>
       <Header />
-      <div className="container">
+      <div className="details-wrapper">
         {startLocal()}
         {
           (arrayRecipe.length === 0)
@@ -176,7 +176,7 @@ function RecipeInProgress() {
               <div key={ index }>
                 <div className="img-title">
                   <img
-                    className="img img-fluid"
+                    className="img img-fluid details-img"
                     data-testid="recipe-photo"
                     src={ slug.includes('meals') ? el.strMealThumb : el.strDrinkThumb }
                     alt={ slug.includes('meals') ? el.strMeal : el.strDrink }
@@ -187,7 +187,7 @@ function RecipeInProgress() {
                   <p data-testid="recipe-category">
                     Category:
                     {' '}
-                    { el.strCategory}
+                    { el.strCategory }
                   </p>
                 </div>
                 <p data-testid="instructions">
@@ -216,7 +216,7 @@ function RecipeInProgress() {
                     />
                     <span>
                       {' '}
-                      {ingredient.join(', ')}
+                      {ingredient.join(' - ')}
                     </span>
 
                   </div>
