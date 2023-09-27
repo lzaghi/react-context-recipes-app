@@ -9,7 +9,7 @@ import '../CSS/FavoriteRecipes.css';
 function FavoriteRecipes() {
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const [filteredRecipes, setFilteredRecipes] = useState(favoriteRecipes);
-  const [btnCopy, setBtnCopy] = useState(Array(favoriteRecipes.length).fill(false));
+  const [btnCopy, setBtnCopy] = useState(Array(favoriteRecipes?.length).fill(false));
 
   const twoSeconds = 2000;
 
@@ -145,8 +145,7 @@ function FavoriteRecipes() {
                     >
                       <img src={ shareIcon } alt="compartilhar" />
                     </button>
-                    { btnCopy[index] && <p className="copied">Link copied!</p>}
-
+                    { btnCopy[index] && <p className="copied">Link copied!</p> }
                   </div>
                 </div>
               </div>

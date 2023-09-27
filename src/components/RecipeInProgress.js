@@ -119,7 +119,7 @@ function RecipeInProgress() {
         ? arrayRecipe[0].strMeal : arrayRecipe[0].strDrink,
       image: ((history.location.pathname === `/meals/${id}/in-progress`))
         ? arrayRecipe[0].strMealThumb : arrayRecipe[0].strDrinkThumb,
-      doneDate: new Date().toISOString(),
+      doneDate: new Date().toLocaleDateString(),
       tags: ((history.location.pathname === `/meals/${id}/in-progress`))
         ? handleArrayTags(arrayRecipe[0].strTags) : [],
     };
