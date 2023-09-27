@@ -67,6 +67,7 @@ function RecipeInProgress() {
           [id]: value,
         },
       };
+      if (!newObj.meals[id].length) delete newObj.meals[id];
       localStorage.setItem('inProgressRecipes', JSON.stringify(newObj));
     } else {
       const newObj = {
@@ -76,6 +77,7 @@ function RecipeInProgress() {
           [id]: value,
         },
       };
+      if (!newObj.drinks[id].length) delete newObj.drinks[id];
       localStorage.setItem('inProgressRecipes', JSON.stringify(newObj));
     }
   }
