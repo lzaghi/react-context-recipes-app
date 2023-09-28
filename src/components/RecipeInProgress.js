@@ -173,8 +173,8 @@ function RecipeInProgress() {
         {startLocal()}
         {
           (arrayRecipe.length === 0)
-            ? <p>carregando...</p> : arrayRecipe.map((el, index) => (
-              <div key={ index }>
+            ? <p>carregando...</p> : arrayRecipe.map((el) => (
+              <div key={ el }>
                 <div className="img-title">
                   <img
                     className="img img-fluid details-img"
@@ -200,7 +200,7 @@ function RecipeInProgress() {
         <div className="group">
           {
             arrayInstructions.map((ingredient, index) => (
-              <div className="list-group" key={ index }>
+              <div className="list-group" key={ ingredient }>
                 <label
                   data-testid={ `${index}-ingredient-step` }
                   htmlFor={ ingredient[0] }

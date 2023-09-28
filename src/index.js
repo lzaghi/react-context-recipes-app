@@ -5,7 +5,6 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import RecipesPrvider from './context/RecipesProvides';
 
 ReactDOM
   .createRoot(document.getElementById('root'))

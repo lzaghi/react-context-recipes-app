@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login';
 import Recipes from './components/Recipes';
 import DoneRecipes from './components/DoneRecipes';

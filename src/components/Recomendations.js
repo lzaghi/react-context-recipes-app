@@ -11,8 +11,6 @@ function Recomendations() {
   const { recomendations } = useContext(RecipesContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // const slug = history.location.pathname;
-
   function sixRecomendations() {
     const SIX = 6;
     const newArray = recomendations.slice(0, SIX);
@@ -33,22 +31,6 @@ function Recomendations() {
     }
     return setCurrentIndex(currentIndex - 1);
   };
-
-  // const changeVisibility = (index) => {
-  //   let result;
-  //   if (currentIndex === index || currentIndex + 1 === index) {
-  //     result = 'visible';
-  //   } else {
-  //     result = 'hidden';
-  //   }
-  //   return result;
-  // };
-
-  // function handleRedirect(recipe) {
-  //   console.log('entrou?');
-  //   if (slug.includes('meals')) history.push(`/drinks/${recipe.idDrink}`);
-  //   if (slug.includes('drinks')) history.push(`/meals/${recipe.idMeal}`);
-  // }
 
   return (
     <div>
@@ -92,7 +74,7 @@ function Recomendations() {
                   sixRecomendations().map((recipe, index) => (
                     <div
                       className="slider-item"
-                      key={ index }
+                      key={ recipe }
                       data-testid={ `${index}-recommendation-card` }
                       style={ { transform: `translate(-${currentIndex * 100}%)` } }
                     >

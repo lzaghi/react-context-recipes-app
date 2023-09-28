@@ -134,7 +134,7 @@ export default function RecipeDetails() {
 
   const buttonProgress = () => {
     let button = '';
-    if (complete !== null && complete.find((e) => e.id === id)) {
+    if (!!complete && complete.find((e) => e.id === id)) {
       return button;
     }
     button = verificProgress;
@@ -162,8 +162,8 @@ export default function RecipeDetails() {
     <>
       <Header />
       <div className="details-wrapper">
-        {checkPathname().map((recipe, index) => (
-          <div className="recipeDetails" key={ index }>
+        {checkPathname().map((recipe) => (
+          <div className="recipeDetails" key={ recipe }>
             <img
               className="img-fluid img details-img"
               data-testid="recipe-photo"
@@ -192,7 +192,7 @@ export default function RecipeDetails() {
         <h3 className="ingredients-title">Ingredients</h3>
         {
           arrayIngredients().map((ingredient, index) => (
-            <div key={ index }>
+            <div key={ ingredient }>
               <ul className="list-group">
                 <li
                   className="list-group-item list-group-item-action list"
@@ -205,17 +205,17 @@ export default function RecipeDetails() {
           ))
         }
         <h3 className="instructions-title">Instructions</h3>
-        {checkPathname().map((int, index) => (
-          <div key={ index }>
+        {checkPathname().map((inst) => (
+          <div key={ inst.strInstructions }>
             <div className="instructions">
-              <p data-testid="instructions">{int.strInstructions}</p>
+              <p data-testid="instructions">{inst.strInstructions}</p>
             </div>
             <div className="container-fluid">
               <div className="iframe-container ">
-                { int.strYoutube && <iframe
+                { inst.strYoutube && <iframe
                   data-testid="video"
                   title="video receita"
-                  src={ int.strYoutube.replace('watch?v=', 'embed/') }
+                  src={ inst.strYoutube.replace('watch?v=', 'embed/') }
                 />}
               </div>
             </div>

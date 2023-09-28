@@ -40,9 +40,9 @@ function Categories() {
   return (
     <div className="categories">
       <div className="btn-toolbar">
-        {fiveCategories().map((category, index) => (
+        {fiveCategories().map((category) => (
           <div
-            key={ index }
+            key={ category.strCategory }
           >
             <button
               className="btn-group me-2 btn-categories"

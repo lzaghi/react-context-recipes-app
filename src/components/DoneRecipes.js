@@ -93,16 +93,15 @@ function DoneRecipes() {
         </div>
 
         <div className="favCard">
-          {search !== null && search.map((el, index) => (
-            <div className="favItem" key={ index }>
+          {!!search && search.map((el, index) => (
+            <div className="favItem" key={ el.name }>
               <Link
                 className="link"
-                to={ `/${`${el.type}s`}/${el.id}` }
+                to={ `/${el.type}s/${el.id}` }
               >
                 <img
                   className="img fav-img"
                   src={ el.image }
-                  key={ index }
                   alt={ el.name }
                   data-testid={ `${index}-horizontal-image` }
                 />
@@ -138,13 +137,6 @@ function DoneRecipes() {
                 </button>
                 { btnCopy[index] && <p className="done-copied">Link copied!</p> }
               </div>
-              {/* {el.type === 'meal' && el.tags.map((value) => (
-                <p
-                  data-testid={ `${index}-${value}-horizontal-tag` }
-                  key={ index }
-                >
-                  {value}
-                </p>))} */}
             </div>
           ))}
         </div>

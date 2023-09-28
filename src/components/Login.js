@@ -20,7 +20,7 @@ function Login({ history }) {
   useEffect(() => {
     const SIX = 6;
 
-    const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     const emailCheck = emailRegex.test(user.email);
     const passCheck = user.password.length > SIX;

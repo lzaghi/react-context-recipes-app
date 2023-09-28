@@ -16,11 +16,6 @@ function RecipesCard() {
   }
 
   useEffect(() => {
-    // if (data?.length === 1 && categoryFilter.length === 0) {
-    //   history.push((history.location.pathname === '/meals')
-    //     ? `/meals/${data[0].idMeal}`
-    //     : `/drinks/${data[0].idDrink}`);
-    // }
     if (data === null) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
       setData([]);
@@ -35,7 +30,7 @@ function RecipesCard() {
   return (
     <div className="card text-center">
       {twelveRecipes().map((recipes, index) => (
-        <Link className="link" key={ index } to={ () => handleRedirect(recipes) }>
+        <Link className="link" key={ recipes } to={ () => handleRedirect(recipes) }>
           <div
             className="g-col-6"
             data-testid={ `${index}-recipe-card` }
