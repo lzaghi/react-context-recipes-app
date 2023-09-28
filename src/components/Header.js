@@ -78,7 +78,8 @@ function Header() {
             </button>
             {
               (slug !== '/profile' && slug !== '/done-recipes'
-              && slug !== '/favorite-recipes' && slug !== `/meals/${id}`)
+              && slug !== '/favorite-recipes'
+              && slug !== `/meals/${id}` && slug !== `/drinks/${id}`)
                 && (
                   <button
                     className="icon search"
