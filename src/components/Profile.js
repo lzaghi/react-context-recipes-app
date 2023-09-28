@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Footer from './Footer';
 import Header from './Header';
+import profileCircle from '../images/profileCircle.svg';
+import '../CSS/Profile.css';
 
 function Profile() {
   const history = useHistory();
@@ -15,39 +16,40 @@ function Profile() {
 
     <>
       <Header />
-      <h2 data-testid="profile-email">{ profileEmailParse?.email }</h2>
-      <div
-        className="container btn"
-      >
-        <button
-          style={ { marginRight: '10px' } }
-          className="btn btn-outline-dark"
-          data-testid="profile-done-btn"
-          type="button"
-          onClick={ () => history.push('/done-recipes') }
-        >
-          Done Recipes
-        </button>
-        <button
-          style={ { marginRight: '10px' } }
-          className="btn btn-outline-dark"
-          data-testid="profile-favorite-btn"
-          type="button"
-          onClick={ () => history.push('/favorite-recipes') }
-        >
-          Favorite Recipes
-        </button>
-        <button
-          className="btn btn-outline-dark"
-          data-testid="profile-logout-btn"
-          type="button"
-          onClick={ logoutFunc }
-        >
-          Logout
-        </button>
+      <div className="profile-wrapper">
+        <div className="profile-box">
+          <img className="profile-icon" src={ profileCircle } alt="profile icon" />
+          <h3 data-testid="profile-email">{ profileEmailParse?.email }</h3>
+        </div>
+        <div className="buttons-container">
+          <button
+            style={ { marginRight: '10px' } }
+            className="btn btn-outline-dark"
+            data-testid="profile-done-btn"
+            type="button"
+            onClick={ () => history.push('/done-recipes') }
+          >
+            Done Recipes
+          </button>
+          <button
+            style={ { marginRight: '10px' } }
+            className="btn btn-outline-dark"
+            data-testid="profile-favorite-btn"
+            type="button"
+            onClick={ () => history.push('/favorite-recipes') }
+          >
+            Favorite Recipes
+          </button>
+          <button
+            className="logout"
+            data-testid="profile-logout-btn"
+            type="button"
+            onClick={ logoutFunc }
+          >
+            Logout
+          </button>
+        </div>
       </div>
-
-      <Footer />
     </>
   );
 }
