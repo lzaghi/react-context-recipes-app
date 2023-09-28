@@ -134,17 +134,10 @@ export default function RecipeDetails() {
 
   const buttonProgress = () => {
     let button = '';
-    if (complete !== null) {
-      complete?.forEach((e) => {
-        if (e.id === id) {
-          button = '';
-        } else {
-          button = verificProgress;
-        }
-      });
-    } else {
-      button = verificProgress;
+    if (complete !== null && complete.find((e) => e.id === id)) {
+      return button;
     }
+    button = verificProgress;
     return button;
   };
 
@@ -152,7 +145,10 @@ export default function RecipeDetails() {
     return (
       <>
         <Header />
-        <div className="load-row">
+        <div
+          className="load-row"
+          style={ { marginTop: '130px' } }
+        >
           <span />
           <span />
           <span />
@@ -164,7 +160,6 @@ export default function RecipeDetails() {
 
   return (
     <>
-      { console.log(id)}
       <Header />
       <div className="details-wrapper">
         {checkPathname().map((recipe, index) => (

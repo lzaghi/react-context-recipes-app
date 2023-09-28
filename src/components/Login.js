@@ -32,7 +32,8 @@ function Login({ history }) {
     }
   }, [user.email, user.password]);
 
-  function setLocal() {
+  function setLocal(e) {
+    e.preventDefault();
     localStorage.setItem('user', JSON.stringify({
       email: user.email,
     }));
@@ -41,7 +42,7 @@ function Login({ history }) {
   }
 
   return (
-    <>
+    <form onSubmit={ setLocal }>
       <div className="text-center">
         <img className="img-fluid" src={ Logo } alt="logo" />
       </div>
@@ -75,16 +76,16 @@ function Login({ history }) {
         <button
           className="btn btn-success "
           data-testid="login-submit-btn"
-          type="button"
+          type="submit"
           disabled={ disabled }
-          onClick={ setLocal }
+          // onClick={ setLocal }
         >
           Enter
         </button>
 
       </div>
 
-    </>
+    </form>
   );
 }
 

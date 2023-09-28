@@ -128,9 +128,7 @@ function RecipeInProgress() {
       ...JSON.parse(localStorage.getItem('doneRecipes')),
       recipe,
     ];
-
     localStorage.setItem('doneRecipes', JSON.stringify(newDone));
-
     history.push('/done-recipes');
   };
 
@@ -155,7 +153,10 @@ function RecipeInProgress() {
     return (
       <>
         <Header />
-        <div className="load-row">
+        <div
+          className="load-row"
+          style={ { marginTop: '130px' } }
+        >
           <span />
           <span />
           <span />
@@ -218,9 +219,7 @@ function RecipeInProgress() {
                       {' '}
                       {ingredient.join(' - ')}
                     </span>
-
                   </div>
-
                 </label>
                 <br />
               </div>
