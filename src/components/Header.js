@@ -53,7 +53,7 @@ function Header() {
           <button
             data-testid="icon-id"
             className="icon"
-            onClick={ () => { history.push('/meals'); } }
+            onClick={ () => history.push('/meals') }
             type="button"
           >
             <img
