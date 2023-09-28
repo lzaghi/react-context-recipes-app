@@ -16,11 +16,11 @@ function RecipesCard() {
   }
 
   useEffect(() => {
-    if (data?.length === 1 && categoryFilter.length === 0) {
-      history.push((history.location.pathname === '/meals')
-        ? `/meals/${data[0].idMeal}`
-        : `/drinks/${data[0].idDrink}`);
-    }
+    // if (data?.length === 1 && categoryFilter.length === 0) {
+    //   history.push((history.location.pathname === '/meals')
+    //     ? `/meals/${data[0].idMeal}`
+    //     : `/drinks/${data[0].idDrink}`);
+    // }
     if (data === null) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
       setData([]);

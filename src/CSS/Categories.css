@@ -1,11 +1,20 @@
 .btn-categories {
   background-color: white;
-  border: none;
+  border: 1px solid #e45700;
+  border-radius: 150px;
   color: #e45700;
+  padding: 5px 10px;
+  transition: 0.3s;
+}
+
+.btn-categories:hover {
+  background-color: #e45700;
+  color: white;
 }
 
 .categories {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 70%;
 }

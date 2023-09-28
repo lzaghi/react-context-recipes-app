@@ -2,7 +2,7 @@
   background-color: #e45700;
   height: 80px;
   margin-top: -8px;
-
+  padding-inline: 10%;
 }
 
 .options {
@@ -16,9 +16,10 @@ h1 {
 .icon {
   background-color: #e45700;
   border: none;
-  padding-left: 10px;
+  margin-top: 0;
+  padding-inline: 20px;
+  transition: 0.2s;
 }
-
 
 .recipe-icon {
   width: 120px;
@@ -29,7 +30,17 @@ h1 {
   width: 40px;
 }
 
-
 .icon:hover {
   opacity: 0.5;
+}
+
+@media screen and ( max-width : 450px ) {
+
+  .header {
+    padding-inline: 0;
+  }
+
+  .icon {
+    padding-inline: 12px;
+  }
 }

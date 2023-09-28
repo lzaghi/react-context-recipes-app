@@ -7,8 +7,21 @@ import '../CSS/DoneRecipes.css';
 
 function DoneRecipes() {
   const data = JSON.parse(localStorage.getItem('doneRecipes'));
-  const [btnCopy, setBtnCopy] = useState();
+  const [btnCopy, setBtnCopy] = useState(Array(data?.length).fill(false));
   const [search, setSearch] = useState([]);
+
+  const twoSeconds = 2000;
+
+  function copiedLinkMsg(index) {
+    let newBtnCopy = [...btnCopy];
+    newBtnCopy[index] = true;
+    setBtnCopy(newBtnCopy);
+
+    newBtnCopy = Array(data.length).fill(false);
+    setTimeout(() => {
+      setBtnCopy(newBtnCopy);
+    }, twoSeconds);
+  }
 
   const handleFilterMeal = () => {
     const mealFilter = data.filter((el) => (el.type === 'meal'));
@@ -28,6 +41,15 @@ function DoneRecipes() {
     setSearch(data);
   }, []);
 
+  const handleCopy = (type, id, index) => {
+    copiedLinkMsg(index);
+    if (type === 'meal') {
+      copy(`http://localhost:3000/meals/${id}`);
+    } else {
+      copy(`http://localhost:3000/drinks/${id}`);
+    }
+  };
+
   if (data === null || data.length === 0) {
     return (
       <>
@@ -40,8 +62,8 @@ function DoneRecipes() {
   return (
     <>
       <Header />
-      <div className="container btn">
-        <div>
+      <div className="wrapper">
+        <div className="d-flex justify-content-center">
           <button
             style={ { marginRight: '10px' } }
             className="btn btn-outline-dark"
@@ -50,9 +72,7 @@ function DoneRecipes() {
             onClick={ handleFilterAll }
           >
             All
-
           </button>
-
           <button
             style={ { marginRight: '10px' } }
             className="btn btn-outline-dark"
@@ -61,9 +81,7 @@ function DoneRecipes() {
             onClick={ handleFilterMeal }
           >
             Meals
-
           </button>
-
           <button
             className="btn btn-outline-dark"
             type="button"
@@ -71,62 +89,62 @@ function DoneRecipes() {
             onClick={ handleFilterDrink }
           >
             Drinks
-
           </button>
-
         </div>
 
-        <div className="cardDone">
+        <div className="favCard">
           {search !== null && search.map((el, index) => (
-            <div className="itemDone" key={ index }>
-              <Link to={ `/${`${el.type}s`}/${el.id}` }>
+            <div className="favItem" key={ index }>
+              <Link
+                className="link"
+                to={ `/${`${el.type}s`}/${el.id}` }
+              >
                 <img
-                  className="img"
+                  className="img fav-img"
                   src={ el.image }
                   key={ index }
                   alt={ el.name }
                   data-testid={ `${index}-horizontal-image` }
                 />
-              </Link>
-              <h4
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                {el.type === 'meal'
-                  ? `${el.nationality} - ${el.category}` : el.alcoholicOrNot}
-              </h4>
-              <a href={ `http://localhost:3000/${`${el.type}s`}/${el.id}` }>
                 <p
+                  className="name"
                   data-testid={ `${index}-horizontal-name` }
                 >
                   {el.name}
                 </p>
-              </a>
+                <p
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  Category:
+                  {' '}
+                  {el.type === 'meal'
+                    ? `${el.category} (${el.nationality})` : el.alcoholicOrNot}
+                </p>
+              </Link>
               <p
                 data-testid={ `${index}-horizontal-done-date` }
               >
                 {el.doneDate}
               </p>
-              <button
-                type="button"
-                className="btnShare"
-                data-testid={ `${index}-horizontal-share-btn` }
-                src={ shareIcon }
-                onClick={ () => {
-                  copy(`http://localhost:3000/${`${el.type}s`}/${el.id}`);
-                  setBtnCopy(true);
-                } }
-              >
-                <img src={ shareIcon } alt="Compartilhar" />
-
-              </button>
-              {(btnCopy === true) && <p>Link copied!</p>}
-              {el.type === 'meal' && el.tags.map((value) => (
+              <div className="share-div">
+                <button
+                  type="button"
+                  className="btnShare"
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  onClick={ () => handleCopy(el.type, el.id, index) }
+                >
+                  <img src={ shareIcon } alt="Compartilhar" />
+                </button>
+                { btnCopy[index] && <p className="done-copied">Link copied!</p> }
+              </div>
+              {/* {el.type === 'meal' && el.tags.map((value) => (
                 <p
                   data-testid={ `${index}-${value}-horizontal-tag` }
                   key={ index }
                 >
                   {value}
-                </p>))}
+                </p>))} */}
             </div>
           ))}
         </div>

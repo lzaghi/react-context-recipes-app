@@ -78,9 +78,9 @@ export default function RecipeDetails() {
   }, [id]);
 
   useEffect(() => {
-    checkPathname();
     requestMeals();
     requestDrink();
+    checkPathname();
   }, []);
 
   const btnStart = (
@@ -134,25 +134,21 @@ export default function RecipeDetails() {
 
   const buttonProgress = () => {
     let button = '';
-    if (complete !== null) {
-      complete?.forEach((e) => {
-        if (e.id === id) {
-          button = '';
-        } else {
-          button = verificProgress;
-        }
-      });
-    } else {
-      button = verificProgress;
+    if (complete !== null && complete.find((e) => e.id === id)) {
+      return button;
     }
+    button = verificProgress;
     return button;
   };
 
-  if (!dataMealsArray?.length > 0 && !dataDrinkArray?.length > 0) {
+  if (!dataMealsArray?.length && !dataDrinkArray?.length) {
     return (
       <>
         <Header />
-        <div className="load-row">
+        <div
+          className="load-row"
+          style={ { marginTop: '130px' } }
+        >
           <span />
           <span />
           <span />
@@ -165,67 +161,73 @@ export default function RecipeDetails() {
   return (
     <>
       <Header />
-      {checkPathname().map((recipe, index) => (
-        <div className="recipeDetails" key={ index }>
-          <img
-            className="img-fluid img"
-            data-testid="recipe-photo"
-            src={ (history.location.pathname === `/meals/${id}`)
-              ? recipe.strMealThumb : recipe.strDrinkThumb }
-            alt={ (history.location.pathname === `/meals/${id}`)
-              ? recipe.strMeal : recipe.strDrink }
-            style={ {
-              maxWidth: '200px', maxHeight: '150px', width: 'auto', height: 'auto' } }
-          />
-          <h1 data-testid="recipe-title">
-            {(history.location.pathname === `/meals/${id}`)
-              ? recipe.strMeal : recipe.strDrink}
+      <div className="details-wrapper">
+        {checkPathname().map((recipe, index) => (
+          <div className="recipeDetails" key={ index }>
+            <img
+              className="img-fluid img details-img"
+              data-testid="recipe-photo"
+              src={ (history.location.pathname === `/meals/${id}`)
+                ? recipe.strMealThumb : recipe.strDrinkThumb }
+              alt={ (history.location.pathname === `/meals/${id}`)
+                ? recipe.strMeal : recipe.strDrink }
+            />
+            <h1 data-testid="recipe-title">
+              {(history.location.pathname === `/meals/${id}`)
+                ? recipe.strMeal : recipe.strDrink}
 
-          </h1>
-          {(history.location.pathname === `/meals/${id}`)
-          && <p data-testid="recipe-category">{ recipe.strCategory }</p>}
-          {(history.location.pathname === `/drinks/${id}`)
+            </h1>
+            {(history.location.pathname === `/meals/${id}`)
+          && (
+            <p data-testid="recipe-category">
+              Category:
+              {' '}
+              { recipe.strCategory }
+            </p>)}
+            {(history.location.pathname === `/drinks/${id}`)
           && <p data-testid="recipe-category">{recipe.strAlcoholic}</p>}
 
-        </div>
-      ))}
-      {
-        arrayIngredients().map((ingredient, index) => (
+          </div>
+        ))}
+        <h3 className="ingredients-title">Ingredients</h3>
+        {
+          arrayIngredients().map((ingredient, index) => (
+            <div key={ index }>
+              <ul className="list-group">
+                <li
+                  className="list-group-item list-group-item-action list"
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {ingredient.join(' - ')}
+                </li>
+              </ul>
+            </div>
+          ))
+        }
+        <h3 className="instructions-title">Instructions</h3>
+        {checkPathname().map((int, index) => (
           <div key={ index }>
-            <ul className="list-group">
-              <li
-                className="list-group-item list-group-item-action list"
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                {ingredient.join(', ')}
-              </li>
-            </ul>
-          </div>
-        ))
-      }
-
-      {checkPathname().map((int, index) => (
-        <div key={ index }>
-          <div className="instructions">
-            <p data-testid="instructions">{int.strInstructions}</p>
-          </div>
-          <div className="container-fluid">
-            <div className="iframe-container ">
-              { int.strYoutube && <iframe
-                data-testid="video"
-                title="video receita"
-                src={ int.strYoutube.replace('watch?v=', 'embed/') }
-              />}
+            <div className="instructions">
+              <p data-testid="instructions">{int.strInstructions}</p>
+            </div>
+            <div className="container-fluid">
+              <div className="iframe-container ">
+                { int.strYoutube && <iframe
+                  data-testid="video"
+                  title="video receita"
+                  src={ int.strYoutube.replace('watch?v=', 'embed/') }
+                />}
+              </div>
             </div>
           </div>
+        ))}
+        <div className="buttons container-fluid">
+          <FavBtn />
+          <ShareBtn />
         </div>
-      ))}
-      <div className="buttons container-fluid">
-        <FavBtn />
-        <ShareBtn />
+        <Recomendations />
+        {buttonProgress()}
       </div>
-      <Recomendations />
-      {buttonProgress()}
     </>
   );
 }

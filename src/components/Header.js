@@ -25,16 +25,16 @@ function Header() {
   };
 
   function handleTitle() {
-    if (slug === '/meals') return 'Meals';
-    if (slug === '/drinks') return 'Drinks';
-    if (slug === '/profile') return 'Profile';
-    if (slug === '/done-recipes') return 'Done Recipes';
-    if (slug === '/favorite-recipes') return 'Favorite Recipes';
+    if (slug === '/meals') return <p className="title">Meals</p>;
+    if (slug === '/drinks') return <p className="title">Drinks</p>;
+    if (slug === '/profile') return <p className="title">Profile</p>;
+    if (slug === '/done-recipes') return <p className="title">Done Recipes</p>;
+    if (slug === '/favorite-recipes') return <p className="title">Favorite Recipes</p>;
   }
 
   return (
     <header>
-      <div className="navbar navbar-expand-lg">
+      <div className="navbar navbar-expand-lg fixed-top">
         <div className="header container-fluid">
           <button
             className="icon"
@@ -53,7 +53,7 @@ function Header() {
           <button
             data-testid="icon-id"
             className="icon"
-            onClick={ () => { history.push('/meals'); } }
+            onClick={ () => history.push('/meals') }
             type="button"
           >
             <img
@@ -64,35 +64,36 @@ function Header() {
 
           </button>
 
-          {/* <div> */}
-          <button
-            className="icon "
-            type="button"
-            onClick={ () => history.push('/profile') }
-          >
-            <img
-              data-testid="profile-top-btn"
-              src={ profilePicture }
-              alt="Foto de Perfil"
-            />
-          </button>
-          {
-            (slug !== '/profile' && slug !== '/done-recipes'
-              && slug !== '/favorite-recipes' && slug !== `/meals/${id}`)
-               && (
-                 <button
-                   className="icon"
-                   type="button"
-                   onClick={ searchButton }
-                 >
-                   <img
-                     data-testid="search-top-btn"
-                     src={ iconePicture }
-                     alt="Ícone de Pesquisa"
-                   />
-                 </button>)
-          }
-          {/* </div> */}
+          <div>
+            <button
+              className="icon"
+              type="button"
+              onClick={ () => history.push('/profile') }
+            >
+              <img
+                data-testid="profile-top-btn"
+                src={ profilePicture }
+                alt="Foto de Perfil"
+              />
+            </button>
+            {
+              (slug !== '/profile' && slug !== '/done-recipes'
+              && slug !== '/favorite-recipes'
+              && slug !== `/meals/${id}` && slug !== `/drinks/${id}`)
+                && (
+                  <button
+                    className="icon search"
+                    type="button"
+                    onClick={ searchButton }
+                  >
+                    <img
+                      data-testid="search-top-btn"
+                      src={ iconePicture }
+                      alt="Ícone de Pesquisa"
+                    />
+                  </button>)
+            }
+          </div>
         </div>
 
       </div>

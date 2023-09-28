@@ -2,12 +2,16 @@ import React, { useContext, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import '../CSS/RecipeDetails.css';
+import rightArrow from '../images/rightArrow.svg';
+import leftArrow from '../images/leftArrow.svg';
 
 function Recomendations() {
   const history = useHistory();
   const { id } = useParams();
   const { recomendations } = useContext(RecipesContext);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // const slug = history.location.pathname;
 
   function sixRecomendations() {
     const SIX = 6;
@@ -17,22 +21,34 @@ function Recomendations() {
 
   const LENGTH = sixRecomendations().length;
 
-  const carouselInfinite = () => {
-    if (currentIndex === LENGTH - 2) {
-      return setCurrentIndex(0);
+  const carouselInfinite = (direction) => {
+    if (direction === 'next') {
+      if (currentIndex === LENGTH - 2) {
+        return setCurrentIndex(0);
+      }
+      return setCurrentIndex(currentIndex + 1);
     }
-    return setCurrentIndex(currentIndex + 2);
+    if (currentIndex === 0) {
+      return setCurrentIndex(LENGTH - 2);
+    }
+    return setCurrentIndex(currentIndex - 1);
   };
 
-  const changeVisibility = (index) => {
-    let result;
-    if (currentIndex === index || currentIndex + 1 === index) {
-      result = 'visible';
-    } else {
-      result = 'hidden';
-    }
-    return result;
-  };
+  // const changeVisibility = (index) => {
+  //   let result;
+  //   if (currentIndex === index || currentIndex + 1 === index) {
+  //     result = 'visible';
+  //   } else {
+  //     result = 'hidden';
+  //   }
+  //   return result;
+  // };
+
+  // function handleRedirect(recipe) {
+  //   console.log('entrou?');
+  //   if (slug.includes('meals')) history.push(`/drinks/${recipe.idDrink}`);
+  //   if (slug.includes('drinks')) history.push(`/meals/${recipe.idMeal}`);
+  // }
 
   return (
     <div>
@@ -48,34 +64,46 @@ function Recomendations() {
           : (
             <>
               <h3
-                className="container-fluid"
+                className="instructions-title"
                 style={ { marginTop: '15px' } }
               >
-                recommendations
-
+                {
+                  history.location.pathname.includes('meals')
+                    ? 'Recommended side drinks'
+                    : 'Recommended side meals'
+                }
               </h3>
-              {/* {console.log(sixRecomendations())} */}
-              <button type="button" onClick={ carouselInfinite }>Next</button>
               <div className="slider-container">
+                <button
+                  className="slider-button previous"
+                  type="button"
+                  onClick={ () => carouselInfinite('previous') }
+                >
+                  <img src={ leftArrow } alt="previous-carousel-item" />
+                </button>
+                <button
+                  className="slider-button next"
+                  type="button"
+                  onClick={ () => carouselInfinite('next') }
+                >
+                  <img src={ rightArrow } alt="next-carousel-item" />
+                </button>
                 {
                   sixRecomendations().map((recipe, index) => (
                     <div
                       className="slider-item"
                       key={ index }
                       data-testid={ `${index}-recommendation-card` }
-                      style={ { transform: `translate(-${currentIndex * 100}%)`,
-                        visibility: changeVisibility(index) } }
+                      style={ { transform: `translate(-${currentIndex * 100}%)` } }
                     >
-                      <div>
+                      <div
+                        className="slider-card"
+                      >
                         <p data-testid={ `${index}-recommendation-title` }>
                           {(history.location.pathname === `/meals/${id}`)
                             ? recipe.strDrink : recipe.strMeal}
                         </p>
                         <img
-                          style={ {
-                            width: '100px',
-                            heigth: '100px',
-                          } }
                           src={ (history.location.pathname === `/meals/${id}`)
                             ? recipe.strDrinkThumb : recipe.strMealThumb }
                           alt={ (history.location.pathname === `/meals/${id}`)

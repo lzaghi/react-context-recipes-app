@@ -67,6 +67,7 @@ function RecipeInProgress() {
           [id]: value,
         },
       };
+      if (!newObj.meals[id].length) delete newObj.meals[id];
       localStorage.setItem('inProgressRecipes', JSON.stringify(newObj));
     } else {
       const newObj = {
@@ -76,6 +77,7 @@ function RecipeInProgress() {
           [id]: value,
         },
       };
+      if (!newObj.drinks[id].length) delete newObj.drinks[id];
       localStorage.setItem('inProgressRecipes', JSON.stringify(newObj));
     }
   }
@@ -117,7 +119,7 @@ function RecipeInProgress() {
         ? arrayRecipe[0].strMeal : arrayRecipe[0].strDrink,
       image: ((history.location.pathname === `/meals/${id}/in-progress`))
         ? arrayRecipe[0].strMealThumb : arrayRecipe[0].strDrinkThumb,
-      doneDate: new Date().toISOString(),
+      doneDate: new Date().toLocaleDateString(),
       tags: ((history.location.pathname === `/meals/${id}/in-progress`))
         ? handleArrayTags(arrayRecipe[0].strTags) : [],
     };
@@ -126,9 +128,7 @@ function RecipeInProgress() {
       ...JSON.parse(localStorage.getItem('doneRecipes')),
       recipe,
     ];
-
     localStorage.setItem('doneRecipes', JSON.stringify(newDone));
-
     history.push('/done-recipes');
   };
 
@@ -153,7 +153,10 @@ function RecipeInProgress() {
     return (
       <>
         <Header />
-        <div className="load-row">
+        <div
+          className="load-row"
+          style={ { marginTop: '130px' } }
+        >
           <span />
           <span />
           <span />
@@ -166,7 +169,7 @@ function RecipeInProgress() {
   return (
     <>
       <Header />
-      <div className="container">
+      <div className="details-wrapper">
         {startLocal()}
         {
           (arrayRecipe.length === 0)
@@ -174,7 +177,7 @@ function RecipeInProgress() {
               <div key={ index }>
                 <div className="img-title">
                   <img
-                    className="img img-fluid"
+                    className="img img-fluid details-img"
                     data-testid="recipe-photo"
                     src={ slug.includes('meals') ? el.strMealThumb : el.strDrinkThumb }
                     alt={ slug.includes('meals') ? el.strMeal : el.strDrink }
@@ -185,7 +188,7 @@ function RecipeInProgress() {
                   <p data-testid="recipe-category">
                     Category:
                     {' '}
-                    { el.strCategory}
+                    { el.strCategory }
                   </p>
                 </div>
                 <p data-testid="instructions">
@@ -214,11 +217,9 @@ function RecipeInProgress() {
                     />
                     <span>
                       {' '}
-                      {ingredient.join(', ')}
+                      {ingredient.join(' - ')}
                     </span>
-
                   </div>
-
                 </label>
                 <br />
               </div>

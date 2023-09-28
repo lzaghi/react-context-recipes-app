@@ -87,7 +87,11 @@ function FavBtn() {
           setLocalheart((!localHeart));
         } }
       >
-        <img src={ localHeart ? blackHeart : whiteHeart } alt="coração" />
+        <img
+          src={ localHeart ? blackHeart : whiteHeart }
+          alt="coração"
+          style={ { maxWidth: '26px' } }
+        />
       </button>
     </div>
 
