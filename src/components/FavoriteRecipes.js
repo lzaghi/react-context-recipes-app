@@ -39,7 +39,7 @@ function FavoriteRecipes() {
   };
 
   const removeLocal = ({ target }) => {
-    const recipeId = target.parentNode.parentNode.id;
+    const recipeId = target.parentNode.parentNode.parentNode.id;
     const removedRecipe = favoriteRecipes.filter((el) => el.id !== recipeId);
     const removedRecipeFix = filteredRecipes.filter((el) => el.id !== recipeId);
     setFilteredRecipes(removedRecipeFix);
@@ -131,7 +131,6 @@ function FavoriteRecipes() {
                   <button
                     type="button"
                     data-testid={ `${index}-horizontal-favorite-btn` }
-                    src={ blackHeart }
                     onClick={ removeLocal }
                   >
                     <img src={ blackHeart } alt="coração" />
