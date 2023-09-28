@@ -6,7 +6,7 @@ O projeto consome duas APIs públicas, [TheMealDB](https://www.themealdb.com/api
 
 O foco desse projeto foi explorar o ecossistema React, especialmente Hooks e ContextAPI.
 
-[Experimente!](react-context-recipes-app.vercel.app/)
+[Experimente!](https://react-context-recipes-app.vercel.app/)
 
 ## Funcionalidades
 
